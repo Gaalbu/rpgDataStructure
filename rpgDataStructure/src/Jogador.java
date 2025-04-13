@@ -11,15 +11,15 @@ public class Jogador {
     // criacao da variavel de moedas do jogo
     private double saldoCristais;
     // criacao da lista de personagens
-    private ListaPersonagens personagens;
+    private ListaEntidades personagens;
 
     
 
-    public ListaPersonagens getPersonagens() {
+    public ListaEntidades getPersonagens() {
         return personagens;
     }
 
-    public void setPersonagens(ListaPersonagens personagens) {
+    public void setPersonagens(ListaEntidades personagens) {
         this.personagens = personagens;
     }
 

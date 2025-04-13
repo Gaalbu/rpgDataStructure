@@ -1,9 +1,9 @@
-public class ListaPersonagens {
-    NodePersonagens head;
-    NodePersonagens tail;
+public class ListaEntidades {
+    NodeEntidades head;
+    NodeEntidades tail;
 
-    public void add(Personagem personagem){
-        NodePersonagens newNode = new NodePersonagens(personagem);
+    public void add(Entidade personagem){
+        NodeEntidades newNode = new NodeEntidades(personagem);
         if(head == null){
             head = newNode;
             tail = newNode;
@@ -14,8 +14,8 @@ public class ListaPersonagens {
         }
     }
 
-    public NodePersonagens remove(){
-        NodePersonagens returnableNode = head;
+    public NodeEntidades remove(){
+        NodeEntidades returnableNode = head;
         if(head == null){
             System.out.println("esta lista esta vazia.");
             return null;
@@ -31,7 +31,7 @@ public class ListaPersonagens {
         }
     }
 
-    public NodePersonagens peek(){
+    public NodeEntidades peek(){
         if(head == null){
             System.out.println("esta lista esta vazia.");
             return null;
@@ -46,7 +46,7 @@ public class ListaPersonagens {
     }
 
     public int size(){
-        NodePersonagens current = head;
+        NodeEntidades current = head;
         int contador = 0;
         while(current != null){
             contador++;
@@ -55,8 +55,8 @@ public class ListaPersonagens {
         return contador;
     }
 
-    public NodePersonagens get(int index){
-        NodePersonagens current = head;
+    public NodeEntidades get(int index){
+        NodeEntidades current = head;
         int contador = 0;
         if(index >= size() || index < 0){
             throw new IndexOutOfBoundsException();
@@ -68,9 +68,9 @@ public class ListaPersonagens {
         return current;
     }
 
-    public void insertByIndex(Personagem personagem, int index){
-        NodePersonagens newNode = new NodePersonagens(personagem);
-        NodePersonagens current = head;
+    public void insertByIndex(Entidade personagem, int index){
+        NodeEntidades newNode = new NodeEntidades(personagem);
+        NodeEntidades current = head;
         int contador = 0;
         if(index > size() || index < 0){
             throw new IndexOutOfBoundsException("indice invalido");
@@ -97,9 +97,9 @@ public class ListaPersonagens {
     
     }
 
-    public NodePersonagens removeByIndex(int index){
-        NodePersonagens current = head;
-        NodePersonagens returnableNode;
+    public NodeEntidades removeByIndex(int index){
+        NodeEntidades current = head;
+        NodeEntidades returnableNode;
         int contador = 0;
         if(index >= size() || index < 0){
             throw new IndexOutOfBoundsException("indice invalido");
@@ -125,7 +125,7 @@ public class ListaPersonagens {
     }
 
     public void printCharacters(){
-        NodePersonagens current = head;
+        NodeEntidades current = head;
         while(current != null){
             System.out.println(current.personagem.nome);
             current = current.next;

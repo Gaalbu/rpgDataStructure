@@ -41,6 +41,7 @@ public class Menu {
                         }
                         System.out.println("Deseja cadastrar['1'] ou entrar na conta['2']?");
                         escolhaSecundaria = sc.nextInt();
+                        sc.nextLine();
                         switch (escolhaSecundaria) {
                             case 1:
                                 //Jogador player = Jogador.cadastrar(idAtual++);
