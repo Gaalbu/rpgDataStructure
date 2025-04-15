@@ -94,7 +94,7 @@ public class MenuAlternativo {
             switch (escolha) {
                 case "1":
                     jogadorAtual.criarPersonagem(idPersonagemAtual++);
-                    jogadorAtual.getPersonagens().get(idPersonagemAtual-1).personagem.inventario.add(new Item(15, "Espada de Madeira", "Comum"));
+                    //jogadorAtual.getPersonagens().get(0).personagem.inventario.add(new Item(15, "Espada de Madeira", "Comum"));
                     break;
                 case "2":
                     if(jogadorAtual.getPersonagens().head == null){
@@ -248,32 +248,7 @@ public class MenuAlternativo {
                     b.getParticipantes().exibirInfoPersonagens();
                     break;
                 case "3":
-                    System.out.println("============OPCOES=DE=ATAQUE============");
-                    System.out.println("Escolha a opcao que o personagem: "); // + personagem + exercera
-                    System.out.println("1.Atacar.");
-                    System.out.println("2.Habilidade.");
-                    System.out.println("3.Item.");
-                    System.out.println("4.Defender.");
-                    System.out.println("========================================");
-                    String opcao = sc.nextLine();
-                    
-                    switch (opcao) {
-                        case "1":
-                            
-                            break;
-                        case "2":
-                            
-                            break;
-                        case "3":
-                            
-                            break;
-                        case "4":
-                            
-                            break;
-                        default:
-                            System.out.println("Voce digitou algo errado!");
-                            break;
-                    }
+                    b.iniciarBatalha();
                     break;
                 case "4":
                     return;    

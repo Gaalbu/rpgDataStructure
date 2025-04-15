@@ -4,8 +4,6 @@ public abstract class Entidade {
     int vidaMaxima,vidaAtual, nivel;
     ListaDeItem inventario = new ListaDeItem();
     Item itemEquipado;
-    //ListaEn habilidades;
-    //ListaEn Inventário;
 
     public Entidade(String nome, String condicao, int vidaMaxima){
         this.nome = nome;
@@ -108,5 +106,13 @@ public abstract class Entidade {
 
     public void subirNivel(int upgrade){
         setNivel(getNivel()+upgrade);
+    }
+
+    public void adicionarItem(Item item){
+        if(inventario.size() == 0){
+            itemEquipado = item;
+        }
+        inventario.add(item);
+
     }
 }

@@ -75,10 +75,18 @@ public class ListaEntidades {
 
     public NodeEntidades getByNome(String nome){
         NodeEntidades current = head;
-        while(current != null && !current.personagem.getNome().equals(nome)){
+        boolean achou = false;
+        while(current != null){
+            if(current.personagem.getNome().equals(nome)){
+                achou = true;
+                break;
+            }
             current = current.next;
         }
-        return current;
+        if(achou == true){
+            return current;
+        }
+        return null;
     }
 
     public void insertByIndex(Entidade personagem, int index){
