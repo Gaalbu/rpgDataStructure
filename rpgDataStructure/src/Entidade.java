@@ -1,11 +1,19 @@
 public abstract class Entidade {
-    String id,nome,condicao;
+    int id;
+    String nome,condicao;
     int vidaMaxima,vidaAtual, nivel;
     ListaEn habilidades;
     ListaEn Inventário;
 
+    public Entidade(String nome, String condicao, int vidaMaxima){
+        this.nome = nome;
+        this.condicao = condicao;
+        this.vidaMaxima = vidaMaxima;
+        this.vidaAtual = vidaMaxima;
+        this.nivel = 0;
+    }
     
-    public Entidade(String id, String nome, String condicao, int vidaMaxima) {
+    public Entidade(int id, String nome, String condicao, int vidaMaxima) {
         this.id = id;
         this.nome = nome;
         this.condicao = condicao;
@@ -15,7 +23,7 @@ public abstract class Entidade {
     }
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -30,7 +38,7 @@ public abstract class Entidade {
     }
 
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

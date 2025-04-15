@@ -2,6 +2,11 @@ public class ListaEntidades {
     NodeEntidades head;
     NodeEntidades tail;
 
+    public ListaEntidades(){
+        this.head = null;
+        this.tail = null;
+    }
+
     public void add(Entidade personagem){
         NodeEntidades newNode = new NodeEntidades(personagem);
         if(head == null){
@@ -68,6 +73,14 @@ public class ListaEntidades {
         return current;
     }
 
+    public NodeEntidades getByNome(String nome){
+        NodeEntidades current = head;
+        while(current != null && !current.personagem.getNome().equals(nome)){
+            current = current.next;
+        }
+        return current;
+    }
+
     public void insertByIndex(Entidade personagem, int index){
         NodeEntidades newNode = new NodeEntidades(personagem);
         NodeEntidades current = head;
@@ -128,6 +141,20 @@ public class ListaEntidades {
         NodeEntidades current = head;
         while(current != null){
             System.out.println(current.personagem.nome);
+            current = current.next;
+        }
+    }
+
+    public void exibirInfoPersonagens(){
+        NodeEntidades current = head;
+        int contador = 1;
+        while(current != null){
+            System.out.println("Exibindo o personagem " + contador + ": ");
+            System.out.println("Nome do personagem: " + current.personagem.getNome());
+            System.out.println("Vida atual do personagem: " + current.personagem.getVidaAtual());
+            System.out.println("Nível do personagem: " + current.personagem.getNivel());
+            System.out.println("-------------------------------------");
+            contador++;
             current = current.next;
         }
     }
