@@ -1,3 +1,4 @@
+import java.nio.channels.Pipe.SourceChannel;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -77,13 +78,14 @@ public class MenuAlternativo {
     public void telaPrincipal(ArrayList<Jogador> jogadores, Jogador jogador, int id){
         ArrayList<Jogador> outrosJogadores = jogadores;
         Jogador jogadorAtual = jogador;
+
         int idPersonagemAtual = id;
         while(true){
             System.out.println("====================MENU===============");
             System.out.println("Escolha abaixo o que deseja fazer.");
             System.out.println("1.Criar Personagem.");
             System.out.println("2.Atribuir pontos de atributos.");
-            System.out.println("3.Comprar/Equipar itens.");
+            System.out.println("3.Equipar itens.");
             System.out.println("4.Escolher modo de batalha.");
             System.out.println("5.Voltar pra tela de login.");
             System.out.println("=======================================");
@@ -92,6 +94,7 @@ public class MenuAlternativo {
             switch (escolha) {
                 case "1":
                     jogadorAtual.criarPersonagem(idPersonagemAtual++);
+                    jogadorAtual.getPersonagens().get(idPersonagemAtual-1).personagem.inventario.add(new Item(15, "Espada de Madeira", "Comum"));
                     break;
                 case "2":
                     if(jogadorAtual.getPersonagens().head == null){
@@ -111,23 +114,34 @@ public class MenuAlternativo {
                     }
                     break;
                 case "3":
-                    while(true){
-                        System.out.println("Voce deseja comprar ['1'] ou equipar itens ['2']?");
-                        String escTemp = sc.nextLine();
-                        if(escTemp.equals("1")){
+                    if(jogadorAtual.getPersonagens().head != null){
+                        System.out.println("Escolha o Personagem que voce deseja equipar o item: ");
+                        jogadorAtual.getPersonagens().printCharacters();
+                        String nome = sc.nextLine();
 
-                            // falta fazer
-
-                        }else if(escTemp.equals("2")){
-
-                            // Falta fazer pq nao entendi os itens
-
-                            break;
-                        }else{
-                            System.out.println("Voce digitou algo errado!");
-                            sc.nextLine();
+                        jogadorAtual.getPersonagens().getByNome(nome).personagem.inventario.printItens();
+                        System.out.println("Digite o numero do item que voce deseja equipar: ");
+                        String itemEscolhido = sc.nextLine();
+    
+                        try {
+                            jogadorAtual.getPersonagens().getByNome(nome).personagem.itemEquipado = jogadorAtual.getPersonagens().getByNome(nome).personagem.inventario.get((Integer.parseInt(itemEscolhido)-1)).item;
+                        } catch (Exception e) {
+                            System.out.println("Nao tem esse index no inventario!");
                         }
+                    }else{
+                        System.out.println("Voce nao tem itens no inventario para equipar");
                     }
+
+
+                    /*Item item1 = new Item(15, "Espada de Madeira", "Comum");
+                    ListaDeItem lItem = new ListaDeItem();
+                    lItem.add(item1);
+                    lItem.printItens();
+
+                    System.out.println("Digite o numero do item que voce deseja equipar: ");
+                    String itemEscolhido = sc.nextLine();
+
+                    jogadorAtual.getPersonagens().getByNome(nome).personagem.inventario.add(lItem.get(Integer.parseInt(itemEscolhido)).item);*/
                     break;
                 case "4":
                     while(true){
@@ -228,13 +242,38 @@ public class MenuAlternativo {
 
             switch (escBatalha) {
                 case "1":
-                    //b.getOrdemTurnos(); // isso aqui não ta funcionando
+                    System.out.println(b.getOrdemTurnos().get(0).personagem.getNome()); 
                     break;
                 case "2":
                     b.getParticipantes().exibirInfoPersonagens();
                     break;
                 case "3":
+                    System.out.println("============OPCOES=DE=ATAQUE============");
+                    System.out.println("Escolha a opcao que o personagem: "); // + personagem + exercera
+                    System.out.println("1.Atacar.");
+                    System.out.println("2.Habilidade.");
+                    System.out.println("3.Item.");
+                    System.out.println("4.Defender.");
+                    System.out.println("========================================");
+                    String opcao = sc.nextLine();
                     
+                    switch (opcao) {
+                        case "1":
+                            
+                            break;
+                        case "2":
+                            
+                            break;
+                        case "3":
+                            
+                            break;
+                        case "4":
+                            
+                            break;
+                        default:
+                            System.out.println("Voce digitou algo errado!");
+                            break;
+                    }
                     break;
                 case "4":
                     return;    

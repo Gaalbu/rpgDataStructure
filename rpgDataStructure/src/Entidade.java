@@ -2,8 +2,10 @@ public abstract class Entidade {
     int id;
     String nome,condicao;
     int vidaMaxima,vidaAtual, nivel;
-    ListaEn habilidades;
-    ListaEn Inventário;
+    ListaDeItem inventario = new ListaDeItem();
+    Item itemEquipado;
+    //ListaEn habilidades;
+    //ListaEn Inventário;
 
     public Entidade(String nome, String condicao, int vidaMaxima){
         this.nome = nome;

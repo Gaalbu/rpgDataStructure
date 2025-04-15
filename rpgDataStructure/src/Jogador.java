@@ -80,10 +80,8 @@ public class Jogador {
         strInput2 = sc.nextLine();
         System.out.println("digite a condicao do personagem: ");
         strInput3 = sc.nextLine();
-        System.out.println("digite a vida do personagem");
-        intInput1 = sc.nextInt();
         sc.nextLine();
-        Personagem p = new Personagem(id, strInput2, strInput3, intInput1);
+        Personagem p = new Personagem(id, strInput2, strInput3, 100);
         personagens.add(p);
         System.out.println("personagem "+p.nome+" criado com sucesso!");
         sc.nextLine();
