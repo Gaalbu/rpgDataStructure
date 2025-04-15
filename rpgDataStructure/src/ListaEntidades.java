@@ -144,4 +144,18 @@ public class ListaEntidades {
             current = current.next;
         }
     }
+
+    public void exibirInfoPersonagens(){
+        NodeEntidades current = head;
+        int contador = 1;
+        while(current != null){
+            System.out.println("Exibindo o personagem " + contador + ": ");
+            System.out.println("Nome do personagem: " + current.personagem.getNome());
+            System.out.println("Vida atual do personagem: " + current.personagem.getVidaAtual());
+            System.out.println("Nível do personagem: " + current.personagem.getNivel());
+            System.out.println("-------------------------------------");
+            contador++;
+            current = current.next;
+        }
+    }
 }

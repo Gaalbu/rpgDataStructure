@@ -52,7 +52,7 @@ public class MenuAlternativo {
                     break;
                 }
             }
-            telaPrincipal(jogadorAtual, idPersonagemAtual++);
+            telaPrincipal(jogadores, jogadorAtual, idPersonagemAtual++);
         }
     }
 
@@ -74,7 +74,8 @@ public class MenuAlternativo {
         return null;
     }
 
-    public void telaPrincipal(Jogador jogador, int id){
+    public void telaPrincipal(ArrayList<Jogador> jogadores, Jogador jogador, int id){
+        ArrayList<Jogador> outrosJogadores = jogadores;
         Jogador jogadorAtual = jogador;
         int idPersonagemAtual = id;
         while(true){
@@ -129,16 +130,123 @@ public class MenuAlternativo {
                     }
                     break;
                 case "4":
-                    
+                    while(true){
+                        String escModo;
+                        ListaEntidades personagensParticipantes = new ListaEntidades();
+                        if(jogadorAtual.getPersonagens().size() != 0){
+                            System.out.println("=======================================");
+                            System.out.println("Qual modo de batalha voce deseja escolher?");
+                            System.out.println("1.PvP");
+                            System.out.println("2.PvE");
+                            System.out.println("=======================================");
+                            escModo = sc.nextLine();
+
+                            System.out.println("Com qual personagem você deseja batalhar?");
+                            jogadorAtual.getPersonagens().printCharacters();
+                            String NomeP1 = sc.nextLine();
+                            NodeEntidades NoDoPersonagemP1 = jogadorAtual.getPersonagens().getByNome(NomeP1);
+                            personagensParticipantes.add(NoDoPersonagemP1.personagem);
+                            System.out.println("voce escolheu o personagem: " + NoDoPersonagemP1.personagem.getNome());
+                            sc.nextLine();
+                        }else{
+                            System.out.println("Voce nao possui personagens cadastrados!");
+                            break;
+                        }
+
+                        if(escModo.equals("1")){
+                            if(outrosJogadores.size() != 1){
+                                System.out.println("\n\nQuem vai ser o jogador 2?");
+                                System.out.println("Lista de possíveis jogadores:");
+                                for (Jogador j : outrosJogadores) {
+                                    if(!j.getNome().equals(jogadorAtual.getNome())){
+                                        System.out.println(j.getNome());
+                                    }
+                                }
+                            }else{
+                                System.out.println("Não tem 2 contas criadas para o PvP poder existir.");
+                                break;
+                            }
+                            String nomeJ2 = sc.nextLine();
+                            System.out.println("==================================");
+                            Jogador j2 = new Jogador();
+                            for (Jogador j : outrosJogadores) {
+                                if(j.getNome().equals(nomeJ2)){
+                                    j2 = j;
+                                    break;
+                                }
+                            }
+
+                            if(j2.getPersonagens() != null){
+                                System.out.println("Escolha o Personagem do jogador 2:");
+                                j2.getPersonagens().printCharacters();
+                                String NomeP2 = sc.nextLine();
+                                NodeEntidades NoDoPersonagemP2 = j2.getPersonagens().getByNome(NomeP2);
+                                personagensParticipantes.add(NoDoPersonagemP2.personagem);
+                                System.out.println("voce escolheu o personagem: " + NoDoPersonagemP2.personagem.getNome());
+                                sc.nextLine();
+                            }else{
+                                System.out.println("Esse jogador não possui personagens!");
+                                break;
+                            }
+
+                            telaBatalhaPvP(personagensParticipantes); //vou ter que colocar isso aqui mas ainda não ta feito. lembrar de por o id aqui tbm
+
+                        }else if(escModo.equals("2")){
+
+                        }else{
+                            System.out.println("Voce digitou algo errado!");
+                        }
+
+                        break;
+                    }
                     break;
                 case "5":
                     return;
-                    //break;
                 default:
                     System.out.println("Voce digitou algo errado!");
                     break;
             }
         }
         // lembrar de dar o return do id pra nao perder o id dos personagens.    
+    }
+
+    public void telaBatalhaPvP(ListaEntidades participantes){
+        Batalha b = new Batalha(0, participantes); // lembrar de alterar o id
+        if(b.getParticipantes().get(0).personagem.getVidaAtual() < 0 || b.getParticipantes().get(1).personagem.getVidaAtual() < 0){
+            System.out.println("Um dos Personagens escolhidos está morto!");
+            return;
+        }
+        while(b.getParticipantes().get(0).personagem.getVidaAtual() > 0 || b.getParticipantes().get(1).personagem.getVidaAtual() > 0){
+            System.out.println("============MENU=DE=BATALHA============");
+            System.out.println("Escolha abaixo o que deseja fazer.");
+            System.out.println("1.Mostrar fila de turnos.");
+            System.out.println("2.Exibir informacoes dos personagens.");
+            System.out.println("3.Menu de opcoes.");
+            System.out.println("4.Encerrar Batalha.");
+            System.out.println("=======================================");
+            String escBatalha = sc.nextLine();
+
+            switch (escBatalha) {
+                case "1":
+                    //b.getOrdemTurnos(); // isso aqui não ta funcionando
+                    break;
+                case "2":
+                    b.getParticipantes().exibirInfoPersonagens();
+                    break;
+                case "3":
+                    
+                    break;
+                case "4":
+                    return;    
+                default:
+                    System.out.println("Voce digitou algo errado!");
+                    break;
+            }
+        }
+        b.exibirRanking();
+    }
+
+    public void telaBatalhaPvE(){
+
     }
 }
