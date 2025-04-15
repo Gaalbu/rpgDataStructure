@@ -11,9 +11,7 @@ public class Jogador {
     // criacao da variavel de moedas do jogo
     private double saldoCristais;
     // criacao da lista de personagens
-    private ListaEntidades personagens;
-
-    
+    private ListaEntidades personagens = new ListaEntidades();
 
     public ListaEntidades getPersonagens() {
         return personagens;
@@ -56,22 +54,28 @@ public class Jogador {
         this.saldoCristais = saldoCristais;
     }
 
+    public Jogador(){
+
+    }
+
+    public Jogador(int id){
+        this.idJogador = id;
+    }
+
     public Jogador(int idJogador, String nome, String senha) {
         this.idJogador = idJogador;
         this.nome = nome;
         this.senha = senha;
-        //this.personagens = null;
     }
-    public void cadastrar(int id){
+    public Jogador cadastrar(int id){
+        Jogador player = new Jogador(id);
         System.out.println("Nome:");
-        setNome(sc.next());
+        player.setNome(sc.next());
         System.out.println("Senha:");
-        setSenha(sc.next());
-        setIdJogaor(id);
+        player.setSenha(sc.next());
+        return player;
     }
-    public void criarPersonagem(){
-        System.out.println("digite o id do personagem: ");
-        strInput1 = sc.nextLine();
+    public void criarPersonagem(int id){
         System.out.println("digite o nome do personagem: ");
         strInput2 = sc.nextLine();
         System.out.println("digite a condicao do personagem: ");
@@ -79,7 +83,7 @@ public class Jogador {
         System.out.println("digite a vida do personagem");
         intInput1 = sc.nextInt();
         sc.nextLine();
-        Personagem p = new Personagem(strInput1, strInput2, strInput3, intInput1);
+        Personagem p = new Personagem(id, strInput2, strInput3, intInput1);
         personagens.add(p);
         System.out.println("personagem "+p.nome+" criado com sucesso!");
         sc.nextLine();

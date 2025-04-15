@@ -31,9 +31,11 @@ public class Menu {
             switch (escolhaInicial) {
                 case 1:
                     if (jogadores.size() == 0){ //Sem jogadores, então cria
+                        Jogador player = new Jogador();
+                        Jogador novo_jogador = player.cadastrar(idAtual++);
                         //Jogador player = Jogador.cadastrar(idAtual++); //Cadastra o player e tbm passa o contador de Id para frente.
-                        //jogadores.add(player);
-                        //System.out.println("Seu nome:"+player.getNome+", Senha:"+player.getSenha);
+                        jogadores.add(novo_jogador);
+                        System.out.println("Seu nome:"+novo_jogador.getNome()+", Senha:"+novo_jogador.getSenha());
                     }else{
                         System.out.println("Já foram castrados os seguintes jogadores:");
                         for (Jogador jogador : jogadores) {
@@ -44,16 +46,18 @@ public class Menu {
                         sc.nextLine();
                         switch (escolhaSecundaria) {
                             case 1:
-                                //Jogador player = Jogador.cadastrar(idAtual++);
-                                //jogadores.add(player);
-                                idAtual++;
+                                Jogador player = new Jogador();
+                                Jogador novo_jogador = player.cadastrar(idAtual++);
+                                jogadores.add(novo_jogador);
+                                System.out.println("Seu nome:"+novo_jogador.getNome()+", Senha:"+novo_jogador.getSenha());
                                 break;
                             case 2:
                                 System.out.println("Digite o nome da conta:");
-                                nomeLogin = sc.next();
-                                senhaLogin = sc.next();
+                                nomeLogin = sc.nextLine();
+                                System.out.println("Digite a senha da conta:");
+                                senhaLogin = sc.nextLine();
                                 for (Jogador jogador : jogadores) { //Percorrendo e locando o jogador.
-                                    if (jogador.getNome() == nomeLogin && jogador.getSenha() == senhaLogin){
+                                    if (jogador.getNome().equals(nomeLogin) && jogador.getSenha().equals(senhaLogin)){
                                         jogadorEscolhido = jogador; // Conta encontrada!
                                         break;
                                     }
@@ -76,9 +80,7 @@ public class Menu {
                     if (jogadorEscolhido == null){
                         System.out.println("Erro! Você não está em conta alguma. Cadastre ou entre em uma!");
                     }else{
-                        /* if(jogadorEscolhido.getPersonagem.getNome == null){
-                           jogadorEscolhido.criarPersonagem(); 
-                        */
+                        
                         
                     }
                     

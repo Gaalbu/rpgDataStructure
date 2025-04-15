@@ -2,6 +2,11 @@ public class ListaEntidades {
     NodeEntidades head;
     NodeEntidades tail;
 
+    public ListaEntidades(){
+        this.head = null;
+        this.tail = null;
+    }
+
     public void add(Entidade personagem){
         NodeEntidades newNode = new NodeEntidades(personagem);
         if(head == null){
@@ -63,6 +68,14 @@ public class ListaEntidades {
         }
         while(current != null && contador < index){
             contador++;
+            current = current.next;
+        }
+        return current;
+    }
+
+    public NodeEntidades getByNome(String nome){
+        NodeEntidades current = head;
+        while(current != null && !current.personagem.getNome().equals(nome)){
             current = current.next;
         }
         return current;
