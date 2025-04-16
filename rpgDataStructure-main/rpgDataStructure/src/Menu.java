@@ -84,7 +84,7 @@ public class Menu {
             System.out.println("====================MENU===============");
             System.out.println("Escolha abaixo o que deseja fazer.");
             System.out.println("1.Criar Personagem.");
-            System.out.println("2.Atribuir pontos de atributos.");
+            System.out.println("2.Upar de nivel.");
             System.out.println("3.Equipar itens.");
             System.out.println("4.Escolher modo de batalha.");
             System.out.println("5.Voltar pra tela de login.");
@@ -100,15 +100,21 @@ public class Menu {
                         System.out.println("Voce nao tem personagens criados!");
                         break;
                     }else{
-                        System.out.println("Para qual personagem voce deseja atribuir pontos de nivel?");
+                        System.out.println("Qual personagem voce subur de nivel?");
                         jogadorAtual.getPersonagens().printCharacters();
                         String escPerso = sc.nextLine();
-                        System.out.println("Quantos pontos voce deseja atribuir ao personagem: " + escPerso + "?");
+                        System.out.println("O custo pra passar de nivel é 100 cristais ");
+
                         String pontosTemp = sc.nextLine();
                         try {
-                            jogadorAtual.getPersonagens().getByNome(escPerso).personagem.subirNivel(Integer.parseInt(pontosTemp));
+                            if (jogadorAtual.getSaldoCristais()>= 100){
+                                jogadorAtual.getPersonagens().getByNome(escPerso).personagem.subirNivel();
+                            }else{
+                                System.out.println("Voce não tem cristais suficientes!");
+                            }
+
                         } catch (Exception e) {
-                            System.out.println("Voce digitou o nome do personagem ou a quantidade de pontos de maneira incorreta!");
+                            System.out.println("Voce digitou o nome do personagem ou voce não tem cristais suficientes!");
                         }
                     }
                     break;
@@ -294,11 +300,11 @@ public class Menu {
                         if(b.getColocacaoEntidades().head.next.personagem.getNivel() == 1){
                             System.out.println("parabens! voce recebeu 100 cristais e uma espada de pedra");
                             jogador.setSaldoCristais(jogador.getSaldoCristais()+ 100);
-                            jogador.getPersonagens().getByNome(b.getColocacaoEntidades().peek().personagem.getNome()).personagem.inventario.add(new Item(20, "espada de pedra", "raro"));
+                            jogador.getPersonagens().getByNome(b.getColocacaoEntidades().peek().personagem.getNome()).personagem.inventario.add(new Item(20, "espada de pedra", "incomum"));
                         }else if(b.getColocacaoEntidades().head.next.personagem.getNivel() == 2){
                             System.out.println("parabens! voce recebeu 125 cristais e uma espada de ferro");
                             jogador.setSaldoCristais(jogador.getSaldoCristais()+ 125);
-                            jogador.getPersonagens().getByNome(b.getColocacaoEntidades().peek().personagem.getNome()).personagem.inventario.add(new Item(25, "espada de ferro", "super raro"));
+                            jogador.getPersonagens().getByNome(b.getColocacaoEntidades().peek().personagem.getNome()).personagem.inventario.add(new Item(25, "espada de ferro", "raro"));
                         }else if(b.getColocacaoEntidades().head.next.personagem.getNivel() == 3){
                             System.out.println("parabens! voce recebeu 150 cristais e uma espada de ouro");
                             jogador.setSaldoCristais(jogador.getSaldoCristais()+ 150);

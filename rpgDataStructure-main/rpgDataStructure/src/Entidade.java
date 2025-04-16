@@ -171,8 +171,12 @@ public abstract class Entidade {
         return vidaAtual > 0;
     }
 
-    public void subirNivel(int upgrade){
-        setNivel(getNivel()+upgrade);
+    public void subirNivel(){
+        this.vidaMaxima = this.vidaMaxima + 20;
+        this.vidaAtual = this.vidaMaxima;
+        setNivel(getNivel()+1);
+        System.out.println(nome+" subiu um nivel");
+        System.out.println("Vida maxima: "+this.vidaMaxima);
     }
 
     public void adicionarItem(Item item){

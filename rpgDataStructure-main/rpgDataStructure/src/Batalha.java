@@ -238,7 +238,7 @@ public class Batalha {
                         break;
                     case "5":
                         Random r = new Random();
-                        if(r.nextInt(5) == 4){
+                        if(r.nextInt(5) == 4 || r.nextInt(5) == 3){
                             System.out.println("voce conseguiu fugir com exito!");
                             return;
                         }else{
