@@ -208,6 +208,27 @@ public class MenuAlternativo {
 
                         }else if(escModo.equals("2")){
 
+                            ListaEntidades monstros = new ListaEntidades();
+                            monstros.add(new Monstro("monstro 1", 120, 10, 20,1));
+                            monstros.add(new Monstro("monstro 2", 100, 15, 25,2));
+                            monstros.add(new Monstro("monstro 3", 140, 5, 15,3));
+                            monstros.add(new Monstro("monstro 4", 150, 20, 30,4));
+
+                            System.out.println("escolha o monstro com quem quer batalhar:\n");
+                            monstros.printCharacters();
+                            String input = sc.nextLine();
+
+                            if(monstros.getByNome(input) == null){
+                                System.out.println("esse monstro nao existe");
+                                break;
+                            }else{
+                                personagensParticipantes.add(monstros.getByNome(input).personagem);
+                                telaBatalhaPvE(personagensParticipantes, jogadorAtual);
+                            }
+
+                            
+
+
                         }else{
                             System.out.println("Voce digitou algo errado!");
                         }
@@ -250,6 +271,7 @@ public class MenuAlternativo {
                     break;
                 case "3":
                     b.iniciarBatalha();
+                    participantes.setarPosBatalhas();
                     break;
                 case "4":
                     return;    
@@ -260,7 +282,59 @@ public class MenuAlternativo {
         }
     }
 
-    public void telaBatalhaPvE(){
+    public void telaBatalhaPvE(ListaEntidades participantes, Jogador jogador){
+        Batalha b = new Batalha(0, participantes); // lembrar de alterar o id
+        if(b.getParticipantes().get(0).personagem.getVidaAtual() < 0 || b.getParticipantes().get(1).personagem.getVidaAtual() < 0){
+            System.out.println("Um dos Personagens escolhidos está morto!");
+            return;
+        }
+        while(b.getParticipantes().get(0).personagem.getVidaAtual() > 0 && b.getParticipantes().get(1).personagem.getVidaAtual() > 0){
+            System.out.println("============MENU=DE=BATALHA============");
+            System.out.println("Escolha abaixo o que deseja fazer.");
+            System.out.println("1.Mostrar fila de turnos.");
+            System.out.println("2.Exibir informacoes dos personagens.");
+            System.out.println("3.Menu de opcoes.");
+            System.out.println("4.Encerrar Batalha.");
+            System.out.println("=======================================");
+            String escBatalha = sc.nextLine();
 
+            switch (escBatalha) {
+                case "1":
+                    b.getOrdemTurnos().printCharacters();
+                    break;
+                case "2":
+                    b.getParticipantes().exibirInfoPersonagens();
+                    break;
+                case "3":
+                    b.iniciarBatalhaPVE();
+                    if(b.getColocacaoEntidades().peek().personagem instanceof Personagem){
+                        if(b.getColocacaoEntidades().head.next.personagem.getNivel() == 1){
+                            System.out.println("parabens! voce recebeu 100 cristais e uma espada de pedra");
+                            jogador.setSaldoCristais(jogador.getSaldoCristais()+ 100);
+                            jogador.getPersonagens().getByNome(b.getColocacaoEntidades().peek().personagem.getNome()).personagem.inventario.add(new Item(20, "espada de pedra", "raro"));
+                        }else if(b.getColocacaoEntidades().head.next.personagem.getNivel() == 2){
+                            System.out.println("parabens! voce recebeu 125 cristais e uma espada de ferro");
+                            jogador.setSaldoCristais(jogador.getSaldoCristais()+ 125);
+                            jogador.getPersonagens().getByNome(b.getColocacaoEntidades().peek().personagem.getNome()).personagem.inventario.add(new Item(25, "espada de ferro", "super raro"));
+                        }else if(b.getColocacaoEntidades().head.next.personagem.getNivel() == 3){
+                            System.out.println("parabens! voce recebeu 150 cristais e uma espada de ouro");
+                            jogador.setSaldoCristais(jogador.getSaldoCristais()+ 150);
+                            jogador.getPersonagens().getByNome(b.getColocacaoEntidades().peek().personagem.getNome()).personagem.inventario.add(new Item(30, "espada de ouro", "epico"));
+                        }else if(b.getColocacaoEntidades().head.next.personagem.getNivel() == 4){
+                            System.out.println("parabens! voce recebeu 200 cristais e uma espada de diamante");
+                            jogador.setSaldoCristais(jogador.getSaldoCristais()+ 200);
+                            jogador.getPersonagens().getByNome(b.getColocacaoEntidades().peek().personagem.getNome()).personagem.inventario.add(new Item(35, "espada de diamante", "lendario"));
+                        }
+                         jogador.getPersonagens().getByNome(b.getColocacaoEntidades().peek().personagem.getNome()).personagem.setPosBatalha();
+                         return;
+                    }
+                    break;
+                case "4":
+                    return;    
+                default:
+                    System.out.println("Voce digitou algo errado!");
+                    break;
+            }
+        }
     }
 }

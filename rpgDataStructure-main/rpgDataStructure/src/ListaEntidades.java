@@ -162,10 +162,28 @@ public class ListaEntidades {
             System.out.println("Vida atual do personagem: " + current.personagem.getVidaAtual());
             System.out.println("Nível do personagem: " + current.personagem.getNivel());
             System.out.println("Equipamento do personagem: " + current.personagem.itemEquipado.getNomeItem()+"  "+current.personagem.itemEquipado.getRaridadeItem());
-            System.out.println("Dano do personagem: " + current.personagem.itemEquipado.getDanoItem());
+            System.out.println("Dano do item: " + current.personagem.itemEquipado.getDanoItem());
             System.out.println("-------------------------------------");
             contador++;
             current = current.next;
+        }
+    }
+
+    public NodeEntidades getHumanoPVE(){
+        NodeEntidades current = head;
+        while(current != null){
+            if(current.personagem instanceof Personagem){
+                return current;
+            }
+            current = current.next;
+        }
+        return null;
+    }
+
+    public void setarPosBatalhas(){
+        NodeEntidades current = head;
+        while(current != null){
+            current.personagem.setPosBatalha();
         }
     }
 }

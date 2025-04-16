@@ -48,6 +48,7 @@ public class ListaDeItem {
         int contador = 1;
         while(current != null){
             System.out.println(contador + "." + current.item.getNomeItem());
+            contador++;
             current = current.next;
         }
     }

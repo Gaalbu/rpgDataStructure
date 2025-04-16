@@ -79,26 +79,32 @@ public abstract class Entidade {
                 entidade.vidaAtual = entidade.vidaAtual - (this.itemEquipado.getDanoItem())/3;
                 entidade.defendendo = false;
                 setVidaAtual(getVidaAtual() - this.itemEquipado.getDanoItem()/3);
+                System.out.println(nome+" desferiu "+ (this.itemEquipado.getDanoItem()/3)+" em "+entidade.nome+ " com uma "+ itemEquipado.getNomeItem()+", mas sofreu "+(this.itemEquipado.getDanoItem()/3)+" por conta dos espinhos");
             }else if(entidade.superDefesa == true){
                 entidade.vidaAtual = entidade.vidaAtual - 0;
                 entidade.superDefesa = false;
                 setVidaAtual(getVidaAtual() - this.itemEquipado.getDanoItem()/3);
+                System.out.println(nome+" desferiu um ataque em "+entidade.nome+ " com uma "+ itemEquipado.getNomeItem()+", mas foi bloqueado pela super defesa e sofreu "+(this.itemEquipado.getDanoItem()/3)+" por conta dos espinhos");
             }
             else {
                 entidade.vidaAtual = entidade.vidaAtual - this.itemEquipado.getDanoItem();
                 setVidaAtual(getVidaAtual() - this.itemEquipado.getDanoItem()/3);
+                System.out.println(nome+" desferiu "+ this.itemEquipado.getDanoItem()+" em "+entidade.nome+ " com uma "+ itemEquipado.getNomeItem()+", mas sofreu "+(this.itemEquipado.getDanoItem()/3)+" por conta dos espinhos");
             }
 
         }else{
             if(entidade.defendendo == true){
                 entidade.vidaAtual = entidade.vidaAtual - (this.itemEquipado.getDanoItem())/3;
                 entidade.defendendo = false;
+                System.out.println(nome+" desferiu "+ (this.itemEquipado.getDanoItem()/3)+" em "+entidade.nome+ " com uma "+ itemEquipado.getNomeItem());
             }else if(entidade.superDefesa == true){
                 entidade.vidaAtual = entidade.vidaAtual - 0;
                 entidade.superDefesa = false;
+                System.out.println(nome+" desferiu um ataque em "+entidade.nome+ " com uma "+ itemEquipado.getNomeItem()+", mas foi bloqueado pela super defesa");
             }
             else {
                 entidade.vidaAtual = entidade.vidaAtual - this.itemEquipado.getDanoItem();
+                System.out.println(nome+" desferiu "+ this.itemEquipado.getDanoItem()+" em "+entidade.nome+ " com uma "+ itemEquipado.getNomeItem());
             }
         }
 
@@ -106,6 +112,7 @@ public abstract class Entidade {
     }
     public void defender(){
         this.defendendo = true;
+        System.out.println(nome+" acionou defesa");
     }
 
     // finalizacao dos metodos da classe entidade, que vai ser herdada por personagem
@@ -147,26 +154,32 @@ public abstract class Entidade {
                     entidade.vidaAtual = entidade.vidaAtual - ((this.itemEquipado.getDanoItem())/3)*2;
                     entidade.defendendo = false;
                     setVidaAtual(getVidaAtual() - this.itemEquipado.getDanoItem()/3);
+                    System.out.println(nome+" desferiu um super ataque que causou "+ ((this.itemEquipado.getDanoItem()/3)*2)+" em "+entidade.nome+ " com uma "+ itemEquipado.getNomeItem()+", mas sofreu "+(this.itemEquipado.getDanoItem()/3)+" por conta dos espinhos");
                 }else if(entidade.superDefesa == true){
                     entidade.vidaAtual = entidade.vidaAtual - 0;
                     entidade.superDefesa = false;
                     setVidaAtual(getVidaAtual() - this.itemEquipado.getDanoItem()/3);
+                    System.out.println(nome+" desferiu um super ataque em "+entidade.nome+ " com uma "+ itemEquipado.getNomeItem()+", mas foi bloqueado pela super defesa e sofreu "+(this.itemEquipado.getDanoItem()/3)+" por conta dos espinhos");
                 }
                 else {
                     entidade.vidaAtual = entidade.vidaAtual - this.itemEquipado.getDanoItem()*2;
                     setVidaAtual(getVidaAtual() - this.itemEquipado.getDanoItem()/3);
+                    System.out.println(nome+" desferiu um super ataque que causou"+ (this.itemEquipado.getDanoItem()*2)+" em "+entidade.nome+ " com uma "+ itemEquipado.getNomeItem()+", mas sofreu "+(this.itemEquipado.getDanoItem()/3)+" por conta dos espinhos");
                 }
 
             }else{
                 if(entidade.defendendo == true){
                     entidade.vidaAtual = entidade.vidaAtual - ((this.itemEquipado.getDanoItem())/3)*2;
                     entidade.defendendo = false;
+                    System.out.println(nome+" desferiu um super ataque que causou "+ ((this.itemEquipado.getDanoItem()/3)*2)+" em "+entidade.nome+ " com uma "+ itemEquipado.getNomeItem());
                 }else if(entidade.superDefesa == true){
                     entidade.vidaAtual = entidade.vidaAtual - 0;
                     entidade.superDefesa = false;
+                    System.out.println(nome+" desferiu um super ataque em "+entidade.nome+ " com uma "+ itemEquipado.getNomeItem()+", mas foi bloqueado pela super defesa");
                 }
                 else {
                     entidade.vidaAtual = entidade.vidaAtual - this.itemEquipado.getDanoItem()*2;
+                    System.out.println(nome+" desferiu um super ataque que causou"+ (this.itemEquipado.getDanoItem()*2)+" em "+entidade.nome+ " com uma "+ itemEquipado.getNomeItem());
                 }
             }
             mana--;
@@ -179,9 +192,18 @@ public abstract class Entidade {
         if (mana>0){
             this.superDefesa = true;
             mana--;
+            System.out.println(nome+" acionou super defesa");
         }else{
             System.out.println("Voce não tem mana para usar as habilidades!");
         }
 
+    }
+
+    public void setPosBatalha(){
+        this.vidaAtual = vidaMaxima;
+        this.mana = 2;
+        this.defendendo = false;
+        this.espinhos = false;
+        this.superDefesa = false;
     }
 }
