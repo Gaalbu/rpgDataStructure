@@ -148,7 +148,7 @@ public class ListaEntidades {
     public void printCharacters(){
         NodeEntidades current = head;
         while(current != null){
-            System.out.println(current.personagem.nome);
+            System.out.println(current.personagem.getNome());
             current = current.next;
         }
     }

@@ -54,7 +54,7 @@ public class PilhaEntidades {
     public void printAll(){
         NodeEntidades current = head;
         while(current != null){
-            System.out.println(current.personagem.nome+" vida: "+ current.personagem.vidaAtual);
+            System.out.println(current.personagem.getNome()+" vida: "+ current.personagem.getVidaAtual());
             current = current.next;
         }
     }

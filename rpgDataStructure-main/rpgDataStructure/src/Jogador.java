@@ -8,9 +8,7 @@ public class Jogador {
 
     private String nome,senha;
     private int idJogador;
-    // criacao da variavel de moedas do jogo
     private double saldoCristais;
-    // criacao da lista de personagens
     private ListaEntidades personagens = new ListaEntidades();
 
     public ListaEntidades getPersonagens() {
@@ -80,7 +78,7 @@ public class Jogador {
         strInput2 = sc.nextLine();
         Personagem p = new Personagem(id, strInput2,  100);
         personagens.add(p);
-        System.out.println("personagem "+p.nome+" criado com sucesso!");
+        System.out.println("personagem "+p.getNome()+" criado com sucesso!");
         sc.nextLine();
     }
 

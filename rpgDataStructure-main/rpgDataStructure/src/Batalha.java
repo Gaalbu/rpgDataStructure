@@ -8,17 +8,14 @@ public class Batalha {
     private ListaEntidades ordemTurnos;
     private PilhaEntidades colocacaoEntidades = new PilhaEntidades();
 
-    
-    
+    Scanner sc = new Scanner(System.in);
+
     public PilhaEntidades getColocacaoEntidades() {
         return colocacaoEntidades;
     }
     public void setColocacaoEntidades(PilhaEntidades colocacaoEntidades) {
         this.colocacaoEntidades = colocacaoEntidades;
     }
-
-    Scanner sc = new Scanner(System.in);
-    
     public int getIdBatalha() {
         return idBatalha;
     }
@@ -62,9 +59,9 @@ public class Batalha {
 
             System.out.println("========================================");
             System.out.println("Vida do seu personagem: " + ordemTurnos.head.personagem.getVidaAtual());
-            System.out.println("Mana do seu personagem: " + ordemTurnos.head.personagem.mana);
+            System.out.println("Mana do seu personagem: " + ordemTurnos.head.personagem.getMana());
             System.out.println("Vida do seu oponente: " + ordemTurnos.tail.personagem.getVidaAtual());
-            System.out.println("Mana do seu oponente: " + ordemTurnos.tail.personagem.mana);
+            System.out.println("Mana do seu oponente: " + ordemTurnos.tail.personagem.getMana());
             System.out.println("========================================");
 
             System.out.println("============OPCOES=DE=ATAQUE============");
@@ -128,7 +125,7 @@ public class Batalha {
                     else if (cura.equals("3")) {
                         int contPocao=1;
                         if (contPocao >0){
-                            ordemTurnos.head.personagem.espinhos = true;
+                            ordemTurnos.head.personagem.setEspinhos(true);
                             System.out.println("Voce tem mais "+ contPocao+" uso dessa poção");
                         }else{
                             System.out.println("Voce não pode mais usar essa poção");
@@ -148,7 +145,6 @@ public class Batalha {
             }
             iniciarTurno();
             setContadorDeTurnos(getContadorDeTurnos()+ 1);
-
         }
 
         setEstadoBatalha("finalizada");
@@ -164,7 +160,7 @@ public class Batalha {
                 System.out.println("========================================");
 
                 System.out.println("============OPCOES=DE=ATAQUE============");
-                System.out.println("Escolha a opcao que o personagem: " + ordemTurnos.head.personagem.getNome() + " exercera."); // + personagem + exercera
+                System.out.println("Escolha a opcao que o personagem: " + ordemTurnos.head.personagem.getNome() + " exercera.");
                 System.out.println("1.Atacar.");
                 System.out.println("2.Habilidade.");
                 System.out.println("3.Item.");
@@ -226,7 +222,7 @@ public class Batalha {
                         else if (cura.equals("3")) {
                             int contPocao=1;
                             if (contPocao >0){
-                                ordemTurnos.head.personagem.espinhos = true;
+                                ordemTurnos.head.personagem.setEspinhos(true);
                                 System.out.println("Voce tem mais "+ contPocao+" uso dessa poção");
                             }else{
                                 System.out.println("Voce não pode mais usar essa poção");
@@ -264,7 +260,6 @@ public class Batalha {
 
         setEstadoBatalha("finalizada");
         exibirRanking();
-
     }
 
     public void iniciarTurno(){

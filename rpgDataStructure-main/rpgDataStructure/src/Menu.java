@@ -1,11 +1,10 @@
-import java.nio.channels.Pipe.SourceChannel;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MenuAlternativo {
+public class Menu {
     
     Scanner sc = new Scanner(System.in);
-    public void Menu(){
+    public void iniciarJogo(){
         int idAtual = 0;
         int idPersonagemAtual = 0;
         Jogador jogadorAtual;
@@ -95,7 +94,6 @@ public class MenuAlternativo {
             switch (escolha) {
                 case "1":
                     jogadorAtual.criarPersonagem(idPersonagemAtual++);
-                    //jogadorAtual.getPersonagens().get(0).personagem.inventario.add(new Item(15, "Espada de Madeira", "Comum"));
                     break;
                 case "2":
                     if(jogadorAtual.getPersonagens().head == null){
@@ -132,17 +130,6 @@ public class MenuAlternativo {
                     }else{
                         System.out.println("Voce nao tem itens no inventario para equipar");
                     }
-
-
-                    /*Item item1 = new Item(15, "Espada de Madeira", "Comum");
-                    ListaDeItem lItem = new ListaDeItem();
-                    lItem.add(item1);
-                    lItem.printItens();
-
-                    System.out.println("Digite o numero do item que voce deseja equipar: ");
-                    String itemEscolhido = sc.nextLine();
-
-                    jogadorAtual.getPersonagens().getByNome(nome).personagem.inventario.add(lItem.get(Integer.parseInt(itemEscolhido)).item);*/
                     break;
                 case "4":
                     while(true){
@@ -204,7 +191,7 @@ public class MenuAlternativo {
                                 break;
                             }
 
-                            telaBatalhaPvP(personagensParticipantes); //vou ter que colocar isso aqui mas ainda não ta feito. lembrar de por o id aqui tbm
+                            telaBatalhaPvP(personagensParticipantes);
 
                         }else if(escModo.equals("2")){
 
@@ -226,9 +213,6 @@ public class MenuAlternativo {
                                 telaBatalhaPvE(personagensParticipantes, jogadorAtual);
                             }
 
-                            
-
-
                         }else{
                             System.out.println("Voce digitou algo errado!");
                         }
@@ -242,8 +226,7 @@ public class MenuAlternativo {
                     System.out.println("Voce digitou algo errado!");
                     break;
             }
-        }
-        // lembrar de dar o return do id pra nao perder o id dos personagens.    
+        }   
     }
 
     public void telaBatalhaPvP(ListaEntidades participantes){
@@ -271,8 +254,8 @@ public class MenuAlternativo {
                     break;
                 case "3":
                     b.iniciarBatalha();
-                    participantes.setarPosBatalhas();
-                    break;
+                    participantes.head.personagem.setPosBatalha();
+                    return;
                 case "4":
                     return;    
                 default:

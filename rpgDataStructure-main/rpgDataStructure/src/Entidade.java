@@ -1,9 +1,9 @@
 public abstract class Entidade {
-    int id;
-    String nome;
-    int vidaMaxima,vidaAtual, nivel;
-    boolean defendendo, superDefesa, espinhos;
-    int mana=2;
+    private int id;
+    private String nome;
+    private int vidaMaxima,vidaAtual, nivel;
+    private boolean defendendo, superDefesa, espinhos;
+    private int mana=2;
     ListaDeItem inventario = new ListaDeItem();
     Item itemEquipado;
 
@@ -11,7 +11,7 @@ public abstract class Entidade {
         this.nome = nome;
         this.vidaMaxima = vidaMaxima;
         this.vidaAtual = vidaMaxima;
-        this.nivel = 0;
+        this.nivel = 1;
     }
     
     public Entidade(int id, String nome, int vidaMaxima) {
@@ -19,15 +19,53 @@ public abstract class Entidade {
         this.nome = nome;
         this.vidaMaxima = vidaMaxima;
         this.vidaAtual = vidaMaxima;
-        this.nivel = 0;
+        this.nivel = 1;
     }
 
+    public Entidade(String nome, int vidaMaxima, int nivel){
+        this.nome = nome;
+        this.vidaMaxima = vidaMaxima;
+        this.vidaAtual = vidaMaxima;
+        this.nivel = nivel;
+    }
+
+    
+
+    public boolean isDefendendo() {
+        return defendendo;
+    }
+
+    public void setDefendendo(boolean defendendo) {
+        this.defendendo = defendendo;
+    }
+
+    public boolean isSuperDefesa() {
+        return superDefesa;
+    }
+
+    public void setSuperDefesa(boolean superDefesa) {
+        this.superDefesa = superDefesa;
+    }
+
+    public boolean isEspinhos() {
+        return espinhos;
+    }
+
+    public void setEspinhos(boolean espinhos) {
+        this.espinhos = espinhos;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
 
     public int getId() {
         return id;
     }
-
-
 
     public void setId(int id) {
         this.id = id;
